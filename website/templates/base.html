@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block head %}
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+      #background {
+        background-color: black;
+        background-image: url("{{ url_for('static', filename='img/pic-1.jpg') }}");
+        height: 400px;
+        width: 100%;
+        background-size: cover;
+      }
+      .navbar-light .navbar-brand,.navbar-light .navbar-nav .nav-link {
+            color: white;
+            font-weight: bold;
+        }
+      #navbarNav{
+        color: white;
+        font-weight: bold;
+      }
+      .custom-form {
+        background-color: white;
+        color: black;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .custom-form label {
+        color: black;
+    }
+    </style>
+  </head>
+  <body id="background">
+    {% with messages = get_flashed_messages(with_categories=true)%} 
+        {% if messages %}   
+            {% for category,message in messages %}
+                {% if category == 'error' %} 
+                <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span> 
+                     </button>
+                </div>
+                {% else %}
+                    <div class="alert alert-success alter-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span> 
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %} {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

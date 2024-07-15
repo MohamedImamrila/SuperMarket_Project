@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% block title %}User Home Page{% endblock %} {% block
+content %}
+<div class="container mt-5" id="navbarNav">
+    <h2 class="mb-4">Purchase Details</h2>
+    <table class="table table-striped table-bordered table-black" id="navbarNav">
+      <thead class="thead-dark">
+        <form action="{{url_for('auth.loginvalidation')}}">
+            <button type="submit" class="btn btn-primary" style="width: fit-content;">Refresh</button>
+          </form>
+        <tr>
+          <th>Email Id</th>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Purchase Date</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for store in storeitems %}
+          <tr>
+            <td>{{ store.email }}</td>
+            <td>{{ store.itemName }}</td>
+            <td>{{ store.quantity }}</td>
+            <td>{{ store.date_of_purchase }}</td>
+            <td>{{ store.rate }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br />
+    <div class="container mt-5">
+      <h2>Purchase Form</h2>
+      <form class="custom-form" action="/buyeditems" method="post">
+        <div class="form-group row">
+          <label for="id" class="col-sm-2 col-form-label">ID</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="id" name="id" value="{{ id }}" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" name="email" value="{{ email }}" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="itemName" class="col-sm-2 col-form-label">Item Name</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="itemName" name="itemName">
+              <option value="" disabled selected>Select an item</option>
+              <option value="item1">Item 1</option>
+              <option value="item2">Item 2</option>
+              <option value="item3">Item 3</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter the quantity">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="amount" placeholder="Enter the amount" name="amount">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-primary" style="border-radius:2px;">Buy Now</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <br>
+    <br>
+    <form action="/logout">
+      <button class="btn btn-primary" type="submit">Logout</button>
+    </form>
+  </div>
+  
+{% endblock %}
